@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <limits.h>
 
+// Compile under windows: 
+// cl /EHsc sizes.c
+
 // Functions prototype for size_t <-> {int | u_long} conversion 
 int size_t2int(size_t);
 size_t  int2size_t(int);
@@ -13,17 +16,17 @@ int main()
    int     int1=7, int2=-8;
    unsigned long uns_long=10;
 
-   printf("Lengths in bytes: size_t=%zu, int=%lu, u_long=%lu\n", sizeof(sizet), sizeof(int1), sizeof(uns_long));
+   printf("Lengths in bytes: size_t=%zu, int=%zu, u_long=%zu\n", sizeof(sizet), sizeof(int1), sizeof(uns_long));
    //printf("Lengths in bytes: size_t=%lu, int=%lu, u_long=%lu, ssize=%zu\n", sizeof(sizet), sizeof(int1), sizeof(uns_long), sizeof(ssizet));
-   printf("INT_MAX=%d, __SIZE_MAX__=%lu\n", INT_MAX, __SIZE_MAX__);
+   printf("INT_MAX=%d, __SIZE_MAX__=%zu\n", INT_MAX, SIZE_MAX);
    
-   printf("INT: size_t2int.VAL=%d, size_t2int.SIZE=%lu, int2size_t.VAL=%zu, int2size_t.SIZE=%zu\n", size_t2int(sizet),sizeof(size_t2int(sizet)), int2size_t(int1), sizeof(int2size_t(int1)) );
+   printf("INT: size_t2int.VAL=%d, size_t2int.SIZE=%zu, int2size_t.VAL=%zu, int2size_t.SIZE=%zu\n", size_t2int(sizet),sizeof(size_t2int(sizet)), int2size_t(int1), sizeof(int2size_t(int1)) );
 
-   printf("U_LONG: size_t2ulong=%lu, int2size_t=%lu\n", size_t2u_long(sizet), sizeof( size_t2u_long(sizet) ) );
+   printf("U_LONG: size_t2ulong=%lu, int2size_t=%zu\n", size_t2u_long(sizet), sizeof( size_t2u_long(sizet) ) );
 
    /* Negative numbers */   
-   printf("INT-,: size_t2int=%d, int2size_t=%lu\n", size_t2int(sizet2), int2size_t(int2) );
-   printf("converted sizes: int=%lu, size_t=%lu\n", sizeof(size_t2int(sizet2)), sizeof(int2size_t(int2)) );
+   printf("INT-,: size_t2int=%d, int2size_t=%zu\n", size_t2int(sizet2), int2size_t(int2) );
+   printf("converted sizes: int=%zu, size_t=%zu\n", sizeof(size_t2int(sizet2)), sizeof(int2size_t(int2)) );
   
    return 0;
 }
@@ -44,7 +47,7 @@ int size_t2int(size_t val) {
 }
 */
 size_t int2size_t(int val) {
-  return (val < 0) ? __SIZE_MAX__ : (size_t)((unsigned)(val));
+  return (val < 0) ? SIZE_MAX : (size_t)((unsigned)(val));
 }
 
 unsigned long size_t2u_long(size_t val) {
