@@ -1,4 +1,4 @@
-# myC
+# castSize
 The C program that tests type sizes. The goal is to convert c-types for EPICS.
 
 Compiles on windows and linux:
